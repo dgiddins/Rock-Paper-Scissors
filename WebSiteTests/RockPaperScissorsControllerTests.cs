@@ -26,6 +26,38 @@ namespace WebSiteTests
         }
 
         [Test]
+        public void WhenPlayerPlaysPaperResultSectionIsUpdatedWithAResult()
+        {
+            var classUnderTest = new RockPaperScissorsController();
+
+            var viewModel = classUnderTest.PlayPaper() as ViewResult;
+
+            var result = viewModel.Model as GameBoardViewModel;
+
+            Assert.That(result.LoserText, Is.EqualTo("Player 1"));
+            Assert.That(result.LoserImage, Is.EqualTo("/Images/paper.png"));
+            Assert.That(result.WinnerText, Is.EqualTo("Computer"));
+            Assert.That(result.WinnerImage, Is.EqualTo("/Images/scissors.png"));
+            Assert.That(result.ResultText, Is.EqualTo("Scissors beats paper, Computer wins!"));
+        }
+
+        [Test]
+        public void WhenPlayerPlaysScissorsResultSectionIsUpdatedWithAResult()
+        {
+            var classUnderTest = new RockPaperScissorsController();
+
+            var viewModel = classUnderTest.PlayScissors() as ViewResult;
+
+            var result = viewModel.Model as GameBoardViewModel;
+
+            Assert.That(result.WinnerText, Is.EqualTo("Player 1"));
+            Assert.That(result.WinnerImage, Is.EqualTo("/Images/scissors.png"));
+            Assert.That(result.LoserText, Is.EqualTo("Computer"));
+            Assert.That(result.LoserImage, Is.EqualTo("/Images/scissors.png"));
+            Assert.That(result.ResultText, Is.EqualTo("Draw - what are the chances"));
+        }
+
+        [Test]
         public void WhenPlayerPlaysRockResultSectionIsUpdatedWithAResult()
         {
             var classUnderTest = new RockPaperScissorsController();
