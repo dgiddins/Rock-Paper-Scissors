@@ -11,5 +11,6 @@ namespace WebSite.ViewModels
         public string WinnerImage { get; set; }
         public string LoserText { get; set; }
         public string LoserImage { get; set; }
+        public string ResultText { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model WebSite.ViewModels.GameBoardViewModel
+
+@{
     ViewBag.Title = "GameBoard";
 }
 
@@ -8,18 +10,17 @@
 Click image to Choose your weapon...
 <ul>
     <li style="display: inline">
-        <label>Rock</label>
-        <img src="~/Images/rock.png"/>
+        <a href="@Url.Action("PlayRock")">
+            <img src="~/Images/rock.png"/>
+        </a>
         
     </li> 
     <li style="display: inline">
-        <label>Paper</label>
         <img src="~/Images/paper.png" />
         
     </li> 
     <li style="display: inline">
-        <label>Scissors</label>
-        <img src="~/Images/scisorspng.png"/>
+        <img src="~/Images/scissors.png"/>
     </li> 
 </ul>
 
@@ -30,17 +31,14 @@ Click image to Choose your weapon...
 Computer will choose after you click but won't cheat, promise....
 <ul>
     <li style="display: inline">
-        <label>Rock</label>
         <img src="~/Images/rock.png"/>
         
     </li> 
     <li style="display: inline">
-        <label>Paper</label>
         <img src="~/Images/paper.png" />
         
     </li> 
     <li style="display: inline">
-        <label>Scissors</label>
         <img src="~/Images/scissors.png"/>
     </li> 
 </ul>
@@ -50,13 +48,19 @@ Computer will choose after you click but won't cheat, promise....
 
 <h2>And the winner is...</h2>
 <ul>
+    <li><label>Winner: @Model.WinnerText</label></li>
     <li style="display: inline">
-        Winner
+        
+        <img src="@Model.WinnerImage"/>
     </li>
+    <li><label>Loser: @Model.LoserText</label></li>
     <li style="display: inline">
-        Looser
+        
+        <img src="@Model.LoserImage"/>
     </li>
 
 </ul>
 
-<h3>Result text goes here....</h3>
+<h3>@Model.ResultText</h3>
+
+@Html.ActionLink("Reset board", "GameBoard")
