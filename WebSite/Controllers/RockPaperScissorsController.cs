@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSite.ViewModels;
 
 namespace WebSite.Controllers
 {
@@ -10,7 +11,8 @@ namespace WebSite.Controllers
     {
         public ActionResult GameBoard()
         {
-            return View();
+            var viewModel = new GameBoardViewModel();
+            return View(viewModel);
         }
 
     }
