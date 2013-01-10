@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace WebSiteTests.Features.Steps
@@ -22,16 +23,32 @@ namespace WebSiteTests.Features.Steps
             set { ScenarioContext.Current["Result"] = value;}
         }
 
-        [Given(@"'(.*)' plays '(.*)'")]
-        public void GivenPlaysRock(string playerName, string weaponName)
+        [StepArgumentTransformation("(.*)")]
+        public Weapon Translate(string weaponName)
         {
-            PlayerMove = new Move() {PlayerName = playerName, WeaponName = weaponName};
+            switch (weaponName)
+            {
+                case "paper":
+                    return Weapon.paper;
+                case "scissors":
+                    return Weapon.scissors;
+                case "rock":
+                    return Weapon.rock;
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+        [Given(@"'(.*)' plays '(.*)'")]
+        public void GivenPlaysRock(string playerName, Weapon weaponType)
+        {
+            PlayerMove = new Move() {PlayerName = playerName, WeaponType = weaponType};
         }
 
         [Given(@"the computer will play '(.*)'")]
-        public void GivenTheComputerWillPayScissors(string weaponName)
+        public void GivenTheComputerWillPayScissors(Weapon weaponType)
         {
-            ComputerMove = new Move() { PlayerName = "Computer", WeaponName = weaponName };
+            ComputerMove = new Move() { PlayerName = "Computer", WeaponType = weaponType };
         }
 
         [When(@"we show weapon")]
@@ -61,64 +78,4 @@ namespace WebSiteTests.Features.Steps
 
 
     }
-
-    public class GameResolver
-    {
-        public GameResult GetResult(Move move1, Move move2)
-        {
-            var result = new GameResult();
-
-            var winningMove = GetWinningMove(move1, move2);
-            var lossingMove = GetLosingMove(move1, move2, winningMove);
-
-            if (winningMove == null)
-            {
-                result.IsDraw = true;
-                result.ResultSummary = "Draw, what are the odds!";
-            }
-            else
-            {
-                result.WinningMove = winningMove;
-                result.ResultSummary = string.Format("{0} beats {1}, {2} wins!", winningMove.WeaponName, lossingMove.WeaponName,
-                                              winningMove.PlayerName);
-            }
-
-            return result;
-        }
-
-        private static Move GetLosingMove(Move move1, Move move2, Move winningMove)
-        {
-            var lossingMove = winningMove != move1 ? move1 : move2;
-            return lossingMove;
-        }
-
-        private Move GetWinningMove(Move move1, Move move2)
-        {
-            if (move1.WeaponName == move2.WeaponName)
-                return null;
-            if ((move1.WeaponName == "rock" && move2.WeaponName == "paper")
-                || (move1.WeaponName == "paper" && move2.WeaponName == "scissors")
-                || (move1.WeaponName == "scissors" && move2.WeaponName == "rock"))
-                return move2;
-            else
-            {
-                return move1;
-            }
-        }
-    }
-
-    public class GameResult
-    {
-        public bool IsDraw { get; set; }
-        public Move WinningMove { get; set; }
-        public string ResultSummary { get; set; }
-    }
-
-    public class Move
-    {
-        public string PlayerName { get; set; }
-        public string WeaponName { get; set; }
-    }
-
-   
 }

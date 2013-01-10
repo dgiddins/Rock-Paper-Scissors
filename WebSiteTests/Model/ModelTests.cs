@@ -4,36 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using WebSiteTests.Features.Steps;
 
 namespace WebSiteTests.Model
 {
     [TestFixture]
-    public class ModelTests
+    public class GameServiceTests
     {
-        //[Test]
-        //public void RockBeatsScissors()
-        //{
-        //    var player1 = new Player();
-        //    player1.Weapon = new Rock();
-        //    var player2 = new Player();
-        //    player2.Weapon = new Scissors();
-            
+        [Test]
+        public void GameServiceCallMoveGeneratorWhenPlayingAgainstComputer()
+        {
+            var classUnderTest = new RockPaperScissorsGameService(this);
 
-        //    var classUnderTest = new RockPaperScissorsGameService();
+            classUnderTest.PlayGame(new Move());
 
-        //    var result = classUnderTest.PlayGame(gameParameters);
-            
-        //    Assert.That(result, Is.EqualTo("Rock beats Scissors"));
-        //}
+            Assert.That(_moveGeneratorCalled, Is.True);
+        }
 
-
+        private bool _moveGeneratorCalled;
+        public Move GenerateComputerMove()
+        {
+            _moveGeneratorCalled = true;
+            return new Move();
+        }
     }
 
     public class RockPaperScissorsGameService
     {
-        public object PlayGame(object gameParameters)
+        private readonly GameServiceTests _gameServiceTests;
+
+        public RockPaperScissorsGameService(GameServiceTests gameServiceTests)
         {
-            throw new NotImplementedException();
+            _gameServiceTests = gameServiceTests;
+        }
+
+        public void PlayGame(Move playerMove)
+        {
+            _gameServiceTests.GenerateComputerMove();
         }
     }
 }

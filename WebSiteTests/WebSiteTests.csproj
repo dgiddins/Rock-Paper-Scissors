@@ -53,6 +53,7 @@
       <DependentUpon>PlayRockPaperScissorsAgainstComputer.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Steps\GamePlaySteps.cs" />
+    <Compile Include="Features\Steps\GameResolver.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
