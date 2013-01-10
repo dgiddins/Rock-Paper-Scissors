@@ -1,0 +1,15 @@
+﻿@using WebSite.Models
+@model WebSite.Models.Weapon
+
+@if (Model == Weapon.rock)
+{
+    <img src="~/Images/rock.png"/>
+}
+else if (Model == Weapon.scissors)
+{
+    <img src="~/Images/scissors.png"/>
+}
+else if (Model == Weapon.paper)
+{
+    <img src="~/Images/paper.png" />
+}

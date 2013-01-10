@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSite.Models;
 using WebSite.ViewModels;
 
 namespace WebSite.Controllers
 {
     public class RockPaperScissorsController : Controller
     {
+        private readonly IRockPaperScissorsGameService _gameService;
+
+        public RockPaperScissorsController(IRockPaperScissorsGameService gameService)
+        {
+            _gameService = gameService;
+        }
+
         public ActionResult GameBoard()
         {
             var viewModel = new GameBoardViewModel();
@@ -17,12 +25,8 @@ namespace WebSite.Controllers
 
         public ActionResult PlayRock()
         {
-            var viewModel = new GameBoardViewModel();
-            viewModel.WinnerText = "Player 1";
-            viewModel.WinnerImage = "/Images/rock.png";
-            viewModel.LoserText = "Computer";
-            viewModel.LoserImage = "/Images/scissors.png";
-            viewModel.ResultText = "Stone beats scissors, Player 1 wins!";
+            var move = new Move() {PlayerName = "Player1", WeaponType = Weapon.rock};
+            var viewModel = _gameService.PlayGame(move);
 
             return View("GameBoard", viewModel);
         }

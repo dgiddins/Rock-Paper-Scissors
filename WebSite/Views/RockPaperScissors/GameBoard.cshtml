@@ -1,4 +1,5 @@
-﻿@model WebSite.ViewModels.GameBoardViewModel
+﻿@using WebSite.Models
+@model WebSite.ViewModels.GameBoardViewModel
 
 @{
     ViewBag.Title = "GameBoard";
@@ -11,18 +12,18 @@ Click image to Choose your weapon...
 <ul>
     <li style="display: inline">
         <a href="@Url.Action("PlayRock")">
-            <img src="~/Images/rock.png"/>
+            @Html.DisplayFor(m => Weapon.rock)
         </a>
         
     </li> 
     <li style="display: inline">
         <a href="@Url.Action("PlayPaper")">
-            <img src="~/Images/paper.png" />
+            @Html.DisplayFor(m => Weapon.paper)
         </a>
     </li> 
     <li style="display: inline">
         <a href="@Url.Action("PlayScissors")">
-            <img src="~/Images/scissors.png"/>
+            @Html.DisplayFor(m => Weapon.scissors)
         </a>
     </li> 
 </ul>
@@ -34,15 +35,15 @@ Click image to Choose your weapon...
 Computer will choose after you click but won't cheat, promise....
 <ul>
     <li style="display: inline">
-        <img src="~/Images/rock.png"/>
+        @Html.DisplayFor(m => Weapon.rock)
         
     </li> 
     <li style="display: inline">
-        <img src="~/Images/paper.png" />
+        @Html.DisplayFor(m => Weapon.paper)
         
     </li> 
     <li style="display: inline">
-        <img src="~/Images/scissors.png"/>
+        @Html.DisplayFor(m => Weapon.scissors)
     </li> 
 </ul>
 

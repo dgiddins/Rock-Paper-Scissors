@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
+using WebSite.Models;
 
 namespace WebSiteTests.Features.Steps
 {

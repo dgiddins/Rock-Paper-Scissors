@@ -126,6 +126,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GameResolver.cs" />
+    <Compile Include="Models\GameResult.cs" />
+    <Compile Include="Models\IComputerMoveGenerator.cs" />
+    <Compile Include="Models\IGameResolver.cs" />
+    <Compile Include="Models\Move.cs" />
+    <Compile Include="Models\RockPaperScissorsGameService.cs" />
+    <Compile Include="Models\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\GameBoardViewModel.cs" />
   </ItemGroup>
@@ -217,10 +224,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\RockPaperScissors\GameBoard.cshtml" />
+    <Content Include="Views\RockPaperScissors\DisplayTemplates\Weapon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

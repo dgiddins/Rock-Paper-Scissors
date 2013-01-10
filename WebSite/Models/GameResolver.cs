@@ -1,4 +1,4 @@
-namespace WebSiteTests.Features.Steps
+namespace WebSite.Models
 {
     public class GameResolver
     {
@@ -53,25 +53,5 @@ namespace WebSiteTests.Features.Steps
                 return move1;
             }
         }
-    }
-
-    public enum Weapon
-    {
-        rock,
-        paper,
-        scissors
-    }
-
-    public class GameResult
-    {
-        public bool IsDraw { get; set; }
-        public Move WinningMove { get; set; }
-        public string ResultSummary { get; set; }
-    }
-
-    public class Move
-    {
-        public string PlayerName { get; set; }
-        public Weapon WeaponType { get; set; }
     }
 }
