@@ -10,6 +10,17 @@ namespace WebSiteTests.Features.Steps
     [Binding]
     public class GamePlaySteps
     {
+        public Move PlayerMove
+        {
+            get { return ScenarioContext.Current["PlayerMove"] as Move; }
+            set { ScenarioContext.Current["PlayerMove"] = value; }
+        }
+        public Move ComputerMove
+        {
+            get { return ScenarioContext.Current["ComputerMove"] as Move; }
+            set { ScenarioContext.Current["ComputerMove"] = value; }
+        }
+
         public string PlayerName
         {
             get { return ScenarioContext.Current["PlayerName"] as string; }
@@ -46,6 +57,8 @@ namespace WebSiteTests.Features.Steps
         [Given(@"'(.*)' plays '(.*)'")]
         public void GivenPlaysRock(string playerName, string weaponName)
         {
+            PlayerMove = new Move() {PlayerName = playerName, WeaponName = weaponName};
+
             PlayerName = playerName;
             PlayerWeapon = weaponName;
         }
@@ -53,48 +66,48 @@ namespace WebSiteTests.Features.Steps
         [Given(@"the computer will play '(.*)'")]
         public void GivenTheComputerWillPayScissors(string weaponName)
         {
+            ComputerMove = new Move() { PlayerName = "Computer", WeaponName = weaponName };
+
             ComputerWeapon = weaponName;
         }
 
         [When(@"we show weapon")]
         public void WhenWeShowWeapon()
         {
-            if (PlayerWeapon == "rock" && ComputerWeapon == "scissors")
-            {
-                WinnerName = PlayerName;
-                ResultSummary = "rock beats scissors, Player1 wins!";
-            }
-            else if (PlayerWeapon == "rock" && ComputerWeapon == "paper")
-            {
-                WinnerName = "Computer";
-                ResultSummary = "paper beats rock, Computer wins!";
-            }
-            else if (PlayerWeapon == "scissors" && ComputerWeapon == "paper")
-            {
-                WinnerName = "Player1";
-                ResultSummary = "scissors beats paper, Player1 wins!";
-            }
-            else if (PlayerWeapon == "scissors" && ComputerWeapon == "rock")
-            {
-                WinnerName = "Computer";
-                ResultSummary = "rock beats scissors, Computer wins!";
-            }
-            else if (PlayerWeapon == "paper" && ComputerWeapon == "rock")
-            {
-                WinnerName = "Player1";
-                ResultSummary = "paper beats rock, Player1 wins!";
-            }
-            else if (PlayerWeapon == "paper" && ComputerWeapon == "scissors")
-            {
-                WinnerName = "Computer";
-                ResultSummary = "scissors beats paper, Computer wins!";
-            }
-            else if (PlayerWeapon == ComputerWeapon)
+
+            var winningMove = GetWinningMove(PlayerMove, ComputerMove);
+
+            var lossingMove = winningMove != PlayerMove ? PlayerMove : ComputerMove;
+
+            if (winningMove == null)
             {
                 IsDraw = true;
                 ResultSummary = "Draw, what are the odds!";
             }
-
+            else
+            {
+                WinnerName = winningMove.PlayerName;
+                ResultSummary = string.Format("{0} beats {1}, {2} wins!", winningMove.WeaponName, lossingMove.WeaponName,
+                                              winningMove.PlayerName);
+            }
+        }
+        
+        private Move GetWinningMove(Move move1, Move move2)
+        {
+            if (move1.WeaponName == "rock" && move2.WeaponName == "paper")
+                return move2;
+            if (move1.WeaponName == "rock" && move2.WeaponName == "scissors")
+                return move1;
+            if (move1.WeaponName == "paper" && move2.WeaponName == "scissors")
+                return move2;
+            if (move1.WeaponName == "paper" && move2.WeaponName == "rock")
+                return move1;
+            if (move1.WeaponName == "scissors" && move2.WeaponName == "paper")
+                return move1;
+            if (move1.WeaponName == "scissors" && move2.WeaponName == "rock")
+                return move2;
+            if (move1.WeaponName == move2.WeaponName) ;
+                return null;
         }
 
         [Then(@"'(.*)' wins")]
@@ -116,5 +129,11 @@ namespace WebSiteTests.Features.Steps
         }
 
 
+    }
+
+    public class Move
+    {
+        public string PlayerName { get; set; }
+        public string WeaponName { get; set; }
     }
 }
