@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WebSite.Models;
+﻿using WebSite.Models;
 
 namespace WebSite.ViewModels
 {
     public class GameBoardViewModel
     {
-        public GameBoardViewModel(Move winnerMove, Move losingMove, string resultText)
+        public GameBoardViewModel(GameResult gameResult)
         {
-            WinnerMove = winnerMove;
-            LosingMove = losingMove;
-            ResultText = resultText;
+            if (gameResult is WinGame)
+            {
+                var winGame = gameResult as WinGame;
+                WinnerMove = winGame.WinningMove;
+                LosingMove = winGame.LosingMove;
+                IsDraw = false;
+            }
+            if (gameResult is DrawnGame)
+            {
+                IsDraw = true;
+            }
+            if (gameResult != null)
+                ResultText = gameResult.ResultSummary;
         }
-
-        public static GameBoardViewModel ShowAsDraw(string resultText)
-        {
-            var viewModel = new GameBoardViewModel(null, null, resultText);
-            viewModel.IsDraw = true;
-            return viewModel;
-        }
-
+        
         public Move WinnerMove { get; private set; }
         public Move LosingMove { get; private set; }
         public string ResultText { get; private set; }

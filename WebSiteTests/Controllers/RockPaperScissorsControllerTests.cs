@@ -69,7 +69,7 @@ namespace WebSiteTests.Controllers
         [Test]
         public void ControllerSetsModelToBeResultOfGameServiceOnPlayRock()
         {
-            _responseFromGameService = new GameBoardViewModel(null, null, null);
+            _responseFromGameService = new GameBoardViewModel(null);
 
             var classUnderTest = BuildUpClassUnderTest();
 
@@ -81,7 +81,7 @@ namespace WebSiteTests.Controllers
         [Test]
         public void ControllerSetsModelToBeResultOfGameServiceOnPlayScissors()
         {
-            _responseFromGameService = new GameBoardViewModel(null, null, null);
+            _responseFromGameService = new GameBoardViewModel(null);
 
             var classUnderTest = BuildUpClassUnderTest();
 
@@ -93,7 +93,7 @@ namespace WebSiteTests.Controllers
         [Test]
         public void ControllerSetsModelToBeResultOfGameServiceOnPlayPaper()
         {
-            _responseFromGameService = new GameBoardViewModel(null, null, null);
+            _responseFromGameService = new GameBoardViewModel(null);
 
             var classUnderTest = BuildUpClassUnderTest();
 

@@ -57,14 +57,14 @@ Computer will choose after you click but won't cheat, promise....
 <ul>
     @if (Model.WinnerMove != null && Model.LosingMove != null)
     {
-        <li><label>Winner: @Model.WinnerMove.PlayerName</label></li>
-        <li style="display: inline">
         
+        <li style="display: inline">
+            <label>Winner: @Model.WinnerMove.PlayerName</label>
             @Html.DisplayFor(m => Model.WinnerMove.WeaponType)
         </li>
-        <li><label>Loser: @Model.LosingMove.PlayerName</label></li>
-        <li style="display: inline">
         
+        <li style="display: inline">
+            <label>Loser: @Model.LosingMove.PlayerName</label>
             @Html.DisplayFor(m => Model.LosingMove.WeaponType)
         </li>
     }

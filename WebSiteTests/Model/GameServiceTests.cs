@@ -1,13 +1,18 @@
 ﻿using NUnit.Framework;
-using WebSite;
 using WebSite.Models;
-using WebSiteTests.Features.Steps;
 
 namespace WebSiteTests.Model
 {
     [TestFixture]
     public class GameServiceTests : IComputerMoveGenerator, IGameResolver
     {
+        internal class FakeGameResult : GameResult
+        {
+            public FakeGameResult() : base("")
+            {
+            }
+        }
+
         private RockPaperScissorsGameService BuildUpClassUnderTest()
         {
             var mockedGameResolver = this as IGameResolver;
@@ -29,6 +34,8 @@ namespace WebSiteTests.Model
         [Test]
         public void GameServiceAlwaysReturnsStateOfBoardAfterPlay()
         {
+            _gameResultToReturnFromResolver = new FakeGameResult();
+
             var classUnderTest = BuildUpClassUnderTest();
 
             var result = classUnderTest.PlayGame(new Move());
@@ -52,12 +59,26 @@ namespace WebSiteTests.Model
         public void GameServicePassesMoveFromMoveGeneratorToGameResolver()
         {
             _moveToReturnFromMoveGenerator = new Move();
+            _gameResultToReturnFromResolver = new FakeGameResult();
 
             var classUnderTest = BuildUpClassUnderTest();
 
             classUnderTest.PlayGame(new Move());
 
             Assert.That(_move2PassedToResolver, Is.SameAs(_moveToReturnFromMoveGenerator));
+        }
+
+        [Test]
+        public void WhenResultIsDrawConfiguresViewAsDraw()
+        {
+            _moveToReturnFromMoveGenerator = new Move();
+            _gameResultToReturnFromResolver = new DrawnGame(string.Empty);
+
+            var classUnderTest = BuildUpClassUnderTest();
+
+            var result = classUnderTest.PlayGame(new Move());
+
+            Assert.That(result.IsDraw, Is.True);
         }
 
         private bool _moveGeneratorCalled;
@@ -70,11 +91,12 @@ namespace WebSiteTests.Model
 
         private Move _move1PassedToResolver;
         private Move _move2PassedToResolver;
+        private GameResult _gameResultToReturnFromResolver;
         public GameResult ResolveGame(Move move1, Move move2)
         {
             _move1PassedToResolver = move1;
             _move2PassedToResolver = move2;
-            return null;
+            return _gameResultToReturnFromResolver;
         }
     }
 }

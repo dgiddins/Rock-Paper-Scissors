@@ -4,24 +4,18 @@ namespace WebSite.Models
     {
         public GameResult ResolveGame(Move move1, Move move2)
         {
-            var result = new GameResult();
-
             var winningMove = GetWinningMove(move1, move2);
             var lossingMove = GetLosingMove(move1, move2, winningMove);
 
             if (IsResultADraw(winningMove))
             {
-                result.IsDraw = true;
-                result.ResultSummary = "Draw, what are the odds!";
+                return new DrawnGame("Draw, what are the odds!");
+                
             }
             else
             {
-                result.WinningMove = winningMove;
-                result.LosingMove = lossingMove;
-                result.ResultSummary = GenerateResultSummaryMessage(winningMove, lossingMove);
+                return new WinGame(winningMove, lossingMove, GenerateResultSummaryMessage(winningMove, lossingMove));
             }
-
-            return result;
         }
 
         private static string GenerateResultSummaryMessage(Move winningMove, Move lossingMove)

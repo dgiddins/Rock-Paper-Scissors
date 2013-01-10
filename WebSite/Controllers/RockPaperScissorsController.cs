@@ -15,7 +15,7 @@ namespace WebSite.Controllers
 
         public ActionResult GameBoard()
         {
-            var viewModel = new GameBoardViewModel(null, null, null);
+            var viewModel = new GameBoardViewModel(null);
             return View(viewModel);
         }
 

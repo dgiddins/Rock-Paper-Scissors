@@ -1,4 +1,3 @@
-using System;
 using WebSite.ViewModels;
 
 namespace WebSite.Models
@@ -24,24 +23,7 @@ namespace WebSite.Models
 
             var result = _gameResolver.ResolveGame(playerMove, generatedMove);
             
-            if (result.IsDraw)
-            {
-                return GameBoardViewModel.ShowAsDraw(result.ResultSummary);
-            }
-            return new GameBoardViewModel(result.WinningMove, result.LosingMove, result.ResultSummary);
-        }
-    }
-
-    public class ComputerMoveGenerator : IComputerMoveGenerator
-    {
-        public Move GenerateComputerMove()
-        {
-            var randomNumberGenerator = new Random();
-            var weaponIndex = randomNumberGenerator.Next(1, 3);
-
-            var weapon = (Weapon) weaponIndex;
-
-            return new Move() {PlayerName = "Computer", WeaponType = weapon};
+            return new GameBoardViewModel(result);
         }
     }
 }

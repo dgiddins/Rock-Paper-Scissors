@@ -24,6 +24,9 @@ namespace WebSiteTests.Features.Steps
             set { ScenarioContext.Current["Result"] = value;}
         }
 
+        private WinGame WinResult { get { return Result as WinGame; } }
+        private DrawnGame DrawResult { get { return Result as DrawnGame; } }
+
         [StepArgumentTransformation("(.*)")]
         public Weapon Translate(string weaponName)
         {
@@ -62,7 +65,13 @@ namespace WebSiteTests.Features.Steps
         [Then(@"'(.*)' wins")]
         public void PlayerWins(string playerName)
         {
-            Assert.That(Result.WinningMove.PlayerName, Is.EqualTo(playerName));
+            Assert.That(WinResult.WinningMove.PlayerName, Is.EqualTo(playerName));
+        }
+
+        [Then(@"'(.*)' loses")]
+        public void PlayerLoses(string playerName)
+        {
+            Assert.That(WinResult.LosingMove.PlayerName, Is.EqualTo(playerName));
         }
 
         [Then(@"the outcome is described as '(.*)'")]
@@ -74,7 +83,7 @@ namespace WebSiteTests.Features.Steps
         [Then(@"there is a draw")]
         public void ThenThereIsADraw()
         {
-            Assert.That(Result.IsDraw, Is.True);
+            Assert.That(DrawResult, Is.Not.Null);
         }
 
 
