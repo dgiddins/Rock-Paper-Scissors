@@ -37,6 +37,11 @@ namespace WebSiteTests.Features.Steps
             get { return ScenarioContext.Current["ResultSummary"] as string; }
             set { ScenarioContext.Current["ResultSummary"] = value; }
         }
+        public bool IsDraw
+        {
+            get { return (bool)ScenarioContext.Current["IsDraw"]; }
+            set { ScenarioContext.Current["IsDraw"] = value; }
+        }
 
         [Given(@"'(.*)' plays rock")]
         public void GivenPlaysRock(string playerName)
@@ -45,17 +50,30 @@ namespace WebSiteTests.Features.Steps
             PlayerWeapon = "rock";
         }
 
-        [Given(@"the computer will play scissors")]
-        public void GivenTheComputerWillPayScissors()
+        [Given(@"the computer will play '(.*)'")]
+        public void GivenTheComputerWillPayScissors(string weaponName)
         {
-            ComputerWeapon = "scissors";
+            ComputerWeapon = weaponName;
         }
 
         [When(@"we show weapon")]
         public void WhenWeShowWeapon()
         {
-            WinnerName = PlayerName;
-            ResultSummary = "Scissors beats rock, Player1 wins!";
+            if (PlayerWeapon == "rock" && ComputerWeapon == "scissors")
+            {
+                WinnerName = PlayerName;
+                ResultSummary = "rock beats scissors, Player1 wins!";
+            }
+            else if (PlayerWeapon == "rock" && ComputerWeapon == "paper")
+            {
+                WinnerName = "Computer";
+                ResultSummary = "paper beats rock, Computer wins!";
+            }
+            else if (PlayerWeapon == ComputerWeapon)
+            {
+                IsDraw = true;
+                ResultSummary = "Draw, what are the odds!";
+            }
         }
 
         [Then(@"'(.*)' wins")]
@@ -69,6 +87,13 @@ namespace WebSiteTests.Features.Steps
         {
             Assert.That(ResultSummary, Is.EqualTo(outcomeText));
         }
+
+        [Then(@"there is a draw")]
+        public void ThenThereIsADraw()
+        {
+            Assert.That(IsDraw, Is.True);
+        }
+
 
     }
 }
