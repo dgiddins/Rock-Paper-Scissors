@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using NUnit.Framework;
 using WebSite.Controllers;
 using WebSite.ViewModels;
 
-namespace WebSiteTests
+namespace WebSiteTests.Controllers
 {
     [TestFixture]
     public class RockPaperScissorsControllerTests

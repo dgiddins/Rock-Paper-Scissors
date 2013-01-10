@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\RockPaperScissorsControllerTests.cs" />
     <Compile Include="Features\PlayRockPaperScissorsAgainstComputer.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -53,7 +54,6 @@
     </Compile>
     <Compile Include="Features\Steps\GamePlaySteps.cs" />
     <Compile Include="Model\ModelTests.cs" />
-    <Compile Include="RockPaperScissorsControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
