@@ -43,11 +43,11 @@ namespace WebSiteTests.Features.Steps
             set { ScenarioContext.Current["IsDraw"] = value; }
         }
 
-        [Given(@"'(.*)' plays rock")]
-        public void GivenPlaysRock(string playerName)
+        [Given(@"'(.*)' plays '(.*)'")]
+        public void GivenPlaysRock(string playerName, string weaponName)
         {
             PlayerName = playerName;
-            PlayerWeapon = "rock";
+            PlayerWeapon = weaponName;
         }
 
         [Given(@"the computer will play '(.*)'")]
@@ -69,11 +69,32 @@ namespace WebSiteTests.Features.Steps
                 WinnerName = "Computer";
                 ResultSummary = "paper beats rock, Computer wins!";
             }
+            else if (PlayerWeapon == "scissors" && ComputerWeapon == "paper")
+            {
+                WinnerName = "Player1";
+                ResultSummary = "scissors beats paper, Player1 wins!";
+            }
+            else if (PlayerWeapon == "scissors" && ComputerWeapon == "rock")
+            {
+                WinnerName = "Computer";
+                ResultSummary = "rock beats scissors, Computer wins!";
+            }
+            else if (PlayerWeapon == "paper" && ComputerWeapon == "rock")
+            {
+                WinnerName = "Player1";
+                ResultSummary = "paper beats rock, Player1 wins!";
+            }
+            else if (PlayerWeapon == "paper" && ComputerWeapon == "scissors")
+            {
+                WinnerName = "Computer";
+                ResultSummary = "scissors beats paper, Computer wins!";
+            }
             else if (PlayerWeapon == ComputerWeapon)
             {
                 IsDraw = true;
                 ResultSummary = "Draw, what are the odds!";
             }
+
         }
 
         [Then(@"'(.*)' wins")]

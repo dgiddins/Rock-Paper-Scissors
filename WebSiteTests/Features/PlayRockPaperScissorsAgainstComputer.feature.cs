@@ -73,7 +73,7 @@ namespace WebSiteTests.Features
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("\'Player1\' plays rock", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("\'Player1\' plays \'rock\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
  testRunner.And("the computer will play \'scissors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
@@ -94,7 +94,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.Given("\'Player1\' plays rock", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("\'Player1\' plays \'rock\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 16
  testRunner.And("the computer will play \'paper\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
@@ -115,7 +115,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.Given("\'Player1\' plays rock", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("\'Player1\' plays \'rock\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 23
  testRunner.And("the computer will play \'rock\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 24
@@ -123,6 +123,132 @@ this.ScenarioSetup(scenarioInfo);
 #line 25
  testRunner.Then("there is a draw", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 26
+ testRunner.And("the outcome is described as \'Draw, what are the odds!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I play scissors computer plays paper")]
+        public virtual void IPlayScissorsComputerPlaysPaper()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I play scissors computer plays paper", ((string[])(null)));
+#line 28
+this.ScenarioSetup(scenarioInfo);
+#line 29
+ testRunner.Given("\'Player1\' plays \'scissors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 30
+ testRunner.And("the computer will play \'paper\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 31
+ testRunner.When("we show weapon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
+ testRunner.Then("\'Player1\' wins", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 33
+ testRunner.And("the outcome is described as \'scissors beats paper, Player1 wins!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I play scissors computer plays rock")]
+        public virtual void IPlayScissorsComputerPlaysRock()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I play scissors computer plays rock", ((string[])(null)));
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 36
+ testRunner.Given("\'Player1\' plays \'scissors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 37
+ testRunner.And("the computer will play \'rock\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
+ testRunner.When("we show weapon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 39
+ testRunner.Then("\'Computer\' wins", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
+ testRunner.And("the outcome is described as \'rock beats scissors, Computer wins!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I play scissors computer plays scissors")]
+        public virtual void IPlayScissorsComputerPlaysScissors()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I play scissors computer plays scissors", ((string[])(null)));
+#line 42
+this.ScenarioSetup(scenarioInfo);
+#line 43
+ testRunner.Given("\'Player1\' plays \'scissors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 44
+ testRunner.And("the computer will play \'scissors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
+ testRunner.When("we show weapon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 46
+ testRunner.Then("there is a draw", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 47
+ testRunner.And("the outcome is described as \'Draw, what are the odds!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I play paper computer plays rock")]
+        public virtual void IPlayPaperComputerPlaysRock()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I play paper computer plays rock", ((string[])(null)));
+#line 50
+this.ScenarioSetup(scenarioInfo);
+#line 51
+ testRunner.Given("\'Player1\' plays \'paper\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 52
+ testRunner.And("the computer will play \'rock\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 53
+ testRunner.When("we show weapon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 54
+ testRunner.Then("\'Player1\' wins", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
+ testRunner.And("the outcome is described as \'paper beats rock, Player1 wins!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I play paper computer plays scissors")]
+        public virtual void IPlayPaperComputerPlaysScissors()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I play paper computer plays scissors", ((string[])(null)));
+#line 57
+this.ScenarioSetup(scenarioInfo);
+#line 58
+ testRunner.Given("\'Player1\' plays \'paper\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
+ testRunner.And("the computer will play \'scissors\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
+ testRunner.When("we show weapon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 61
+ testRunner.Then("\'Computer\' wins", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 62
+ testRunner.And("the outcome is described as \'scissors beats paper, Computer wins!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I play paper computer plays paper")]
+        public virtual void IPlayPaperComputerPlaysPaper()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I play paper computer plays paper", ((string[])(null)));
+#line 64
+this.ScenarioSetup(scenarioInfo);
+#line 65
+ testRunner.Given("\'Player1\' plays \'paper\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 66
+ testRunner.And("the computer will play \'paper\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
+ testRunner.When("we show weapon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 68
+ testRunner.Then("there is a draw", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 69
  testRunner.And("the outcome is described as \'Draw, what are the odds!\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
