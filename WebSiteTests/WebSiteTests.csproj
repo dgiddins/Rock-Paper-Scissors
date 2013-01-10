@@ -55,7 +55,6 @@
     <Compile Include="Features\Steps\GamePlaySteps.cs" />
     <Compile Include="Model\GameServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\GameBoardViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

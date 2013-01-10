@@ -1,3 +1,4 @@
+using System;
 using WebSite.ViewModels;
 
 namespace WebSite.Models
@@ -6,7 +7,6 @@ namespace WebSite.Models
     {
         GameBoardViewModel PlayGame(Move playerMove);
     }
-
     public class RockPaperScissorsGameService : IRockPaperScissorsGameService
     {
         private readonly IGameResolver _gameResolver;
@@ -22,9 +22,26 @@ namespace WebSite.Models
         {
             var generatedMove = _computerMoveGenerator.GenerateComputerMove();
 
-            _gameResolver.ResolveGame(playerMove, generatedMove);
+            var result = _gameResolver.ResolveGame(playerMove, generatedMove);
             
-            return new GameBoardViewModel();
+            if (result.IsDraw)
+            {
+                return GameBoardViewModel.ShowAsDraw(result.ResultSummary);
+            }
+            return new GameBoardViewModel(result.WinningMove, result.LosingMove, result.ResultSummary);
+        }
+    }
+
+    public class ComputerMoveGenerator : IComputerMoveGenerator
+    {
+        public Move GenerateComputerMove()
+        {
+            var randomNumberGenerator = new Random();
+            var weaponIndex = randomNumberGenerator.Next(1, 3);
+
+            var weapon = (Weapon) weaponIndex;
+
+            return new Move() {PlayerName = "Computer", WeaponType = weapon};
         }
     }
 }

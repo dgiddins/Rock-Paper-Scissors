@@ -1,8 +1,8 @@
 namespace WebSite.Models
 {
-    public class GameResolver
+    public class GameResolver : IGameResolver
     {
-        public GameResult GetResult(Move move1, Move move2)
+        public GameResult ResolveGame(Move move1, Move move2)
         {
             var result = new GameResult();
 
@@ -17,6 +17,7 @@ namespace WebSite.Models
             else
             {
                 result.WinningMove = winningMove;
+                result.LosingMove = lossingMove;
                 result.ResultSummary = GenerateResultSummaryMessage(winningMove, lossingMove);
             }
 

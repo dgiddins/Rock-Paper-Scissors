@@ -70,10 +70,11 @@ namespace WebSiteTests.Model
 
         private Move _move1PassedToResolver;
         private Move _move2PassedToResolver;
-        public void ResolveGame(Move move1, Move move2)
+        public GameResult ResolveGame(Move move1, Move move2)
         {
             _move1PassedToResolver = move1;
             _move2PassedToResolver = move2;
+            return null;
         }
     }
 }

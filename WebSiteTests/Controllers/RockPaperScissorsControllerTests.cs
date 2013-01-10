@@ -26,11 +26,8 @@ namespace WebSiteTests.Controllers
 
             var result = viewModel.Model as GameBoardViewModel;
 
-            Assert.That(result.WinnerText, Is.Null);
-            Assert.That(result.WinnerImage, Is.Null);
-            Assert.That(result.LoserText, Is.Null);
-            Assert.That(result.LoserImage, Is.Null);
             Assert.That(result.ResultText, Is.Null);
+            Assert.That(result.WinnerMove, Is.Null);
         }
 
         [Test]
@@ -44,15 +41,63 @@ namespace WebSiteTests.Controllers
             Assert.That(_movedPassedToGameService.WeaponType, Is.EqualTo(Weapon.rock));
             Assert.That(_movedPassedToGameService.PlayerName, Is.EqualTo("Player1"));
         }
+        
+        [Test]
+        public void ControllerPassesMoveDetailsToGameServiceWhenPlayingPaper()
+        {
+            var classUnderTest = BuildUpClassUnderTest();
+
+            classUnderTest.PlayPaper();
+
+            Assert.That(_movedPassedToGameService, Is.Not.Null);
+            Assert.That(_movedPassedToGameService.WeaponType, Is.EqualTo(Weapon.paper));
+            Assert.That(_movedPassedToGameService.PlayerName, Is.EqualTo("Player1"));
+        }
+        
+        [Test]
+        public void ControllerPassesMoveDetailsToGameServiceWhenPlayingScissors()
+        {
+            var classUnderTest = BuildUpClassUnderTest();
+
+            classUnderTest.PlayScissors();
+
+            Assert.That(_movedPassedToGameService, Is.Not.Null);
+            Assert.That(_movedPassedToGameService.WeaponType, Is.EqualTo(Weapon.scissors));
+            Assert.That(_movedPassedToGameService.PlayerName, Is.EqualTo("Player1"));
+        }
 
         [Test]
-        public void ControllerSetsModelToBeResultOfGameService()
+        public void ControllerSetsModelToBeResultOfGameServiceOnPlayRock()
         {
-            _responseFromGameService = new GameBoardViewModel();
+            _responseFromGameService = new GameBoardViewModel(null, null, null);
 
             var classUnderTest = BuildUpClassUnderTest();
 
             var viewResult = classUnderTest.PlayRock() as ViewResult;
+
+            Assert.That(viewResult.Model, Is.SameAs(_responseFromGameService));
+        }
+
+        [Test]
+        public void ControllerSetsModelToBeResultOfGameServiceOnPlayScissors()
+        {
+            _responseFromGameService = new GameBoardViewModel(null, null, null);
+
+            var classUnderTest = BuildUpClassUnderTest();
+
+            var viewResult = classUnderTest.PlayScissors() as ViewResult;
+
+            Assert.That(viewResult.Model, Is.SameAs(_responseFromGameService));
+        }
+
+        [Test]
+        public void ControllerSetsModelToBeResultOfGameServiceOnPlayPaper()
+        {
+            _responseFromGameService = new GameBoardViewModel(null, null, null);
+
+            var classUnderTest = BuildUpClassUnderTest();
+
+            var viewResult = classUnderTest.PlayPaper() as ViewResult;
 
             Assert.That(viewResult.Model, Is.SameAs(_responseFromGameService));
         }
@@ -63,38 +108,6 @@ namespace WebSiteTests.Controllers
         {
             _movedPassedToGameService = playerMove;
             return _responseFromGameService;
-        }
-
-        [Test]
-        public void WhenPlayerPlaysPaperResultSectionIsUpdatedWithAResult()
-        {
-            var classUnderTest = BuildUpClassUnderTest();
-
-            var viewModel = classUnderTest.PlayPaper() as ViewResult;
-
-            var result = viewModel.Model as GameBoardViewModel;
-
-            Assert.That(result.LoserText, Is.EqualTo("Player 1"));
-            Assert.That(result.LoserImage, Is.EqualTo("/Images/paper.png"));
-            Assert.That(result.WinnerText, Is.EqualTo("Computer"));
-            Assert.That(result.WinnerImage, Is.EqualTo("/Images/scissors.png"));
-            Assert.That(result.ResultText, Is.EqualTo("Scissors beats paper, Computer wins!"));
-        }
-
-        [Test]
-        public void WhenPlayerPlaysScissorsResultSectionIsUpdatedWithAResult()
-        {
-            var classUnderTest = BuildUpClassUnderTest();
-
-            var viewModel = classUnderTest.PlayScissors() as ViewResult;
-
-            var result = viewModel.Model as GameBoardViewModel;
-
-            Assert.That(result.WinnerText, Is.EqualTo("Player 1"));
-            Assert.That(result.WinnerImage, Is.EqualTo("/Images/scissors.png"));
-            Assert.That(result.LoserText, Is.EqualTo("Computer"));
-            Assert.That(result.LoserImage, Is.EqualTo("/Images/scissors.png"));
-            Assert.That(result.ResultText, Is.EqualTo("Draw - what are the chances"));
         }
     }
 }

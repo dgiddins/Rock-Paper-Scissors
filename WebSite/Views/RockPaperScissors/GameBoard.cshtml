@@ -3,6 +3,9 @@
 
 @{
     ViewBag.Title = "GameBoard";
+    ViewBag.Rock = Weapon.rock;
+    ViewBag.Paper = Weapon.paper;
+    ViewBag.Scissors = Weapon.scissors;
 }
 
 <h2>GameBoard</h2>
@@ -12,18 +15,18 @@ Click image to Choose your weapon...
 <ul>
     <li style="display: inline">
         <a href="@Url.Action("PlayRock")">
-            @Html.DisplayFor(m => Weapon.rock)
+            @Html.DisplayFor(m => Model.Rock)
         </a>
         
     </li> 
     <li style="display: inline">
         <a href="@Url.Action("PlayPaper")">
-            @Html.DisplayFor(m => Weapon.paper)
+            @Html.DisplayFor(m => Model.Paper)
         </a>
     </li> 
     <li style="display: inline">
         <a href="@Url.Action("PlayScissors")">
-            @Html.DisplayFor(m => Weapon.scissors)
+            @Html.DisplayFor(m => Model.Scissors)
         </a>
     </li> 
 </ul>
@@ -35,15 +38,15 @@ Click image to Choose your weapon...
 Computer will choose after you click but won't cheat, promise....
 <ul>
     <li style="display: inline">
-        @Html.DisplayFor(m => Weapon.rock)
+        @Html.DisplayFor(m => Model.Rock)
         
     </li> 
     <li style="display: inline">
-        @Html.DisplayFor(m => Weapon.paper)
+        @Html.DisplayFor(m => Model.Paper)
         
     </li> 
     <li style="display: inline">
-        @Html.DisplayFor(m => Weapon.scissors)
+        @Html.DisplayFor(m => Model.Scissors)
     </li> 
 </ul>
 
@@ -52,17 +55,19 @@ Computer will choose after you click but won't cheat, promise....
 
 <h2>And the winner is...</h2>
 <ul>
-    <li><label>Winner: @Model.WinnerText</label></li>
-    <li style="display: inline">
+    @if (Model.WinnerMove != null && Model.LosingMove != null)
+    {
+        <li><label>Winner: @Model.WinnerMove.PlayerName</label></li>
+        <li style="display: inline">
         
-        <img src="@Model.WinnerImage"/>
-    </li>
-    <li><label>Loser: @Model.LoserText</label></li>
-    <li style="display: inline">
+            @Html.DisplayFor(m => Model.WinnerMove.WeaponType)
+        </li>
+        <li><label>Loser: @Model.LosingMove.PlayerName</label></li>
+        <li style="display: inline">
         
-        <img src="@Model.LoserImage"/>
-    </li>
-
+            @Html.DisplayFor(m => Model.LosingMove.WeaponType)
+        </li>
+    }
 </ul>
 
 <h3>@Model.ResultText</h3>

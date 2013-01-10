@@ -56,7 +56,7 @@ namespace WebSiteTests.Features.Steps
         public void WhenWeShowWeapon()
         {
             var systemUnderTest = new GameResolver();
-            Result = systemUnderTest.GetResult(PlayerMove, ComputerMove);
+            Result = systemUnderTest.ResolveGame(PlayerMove, ComputerMove);
         }
 
         [Then(@"'(.*)' wins")]

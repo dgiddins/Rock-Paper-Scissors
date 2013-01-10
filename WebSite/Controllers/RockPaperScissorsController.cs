@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebSite.Models;
 using WebSite.ViewModels;
 
@@ -19,42 +15,43 @@ namespace WebSite.Controllers
 
         public ActionResult GameBoard()
         {
-            var viewModel = new GameBoardViewModel();
+            var viewModel = new GameBoardViewModel(null, null, null);
             return View(viewModel);
         }
 
         public ActionResult PlayRock()
         {
-            var move = new Move() {PlayerName = "Player1", WeaponType = Weapon.rock};
+            var move = GenerateMove(Weapon.rock);
             var viewModel = _gameService.PlayGame(move);
 
-            return View("GameBoard", viewModel);
+            return GameBoardView(viewModel);
         }
 
         public ActionResult PlayPaper()
         {
-            var viewModel = new GameBoardViewModel();
-            viewModel.LoserText = "Player 1";
-            viewModel.LoserImage = "/Images/paper.png";
-            viewModel.WinnerText = "Computer";
-            viewModel.WinnerImage = "/Images/scissors.png";
-            viewModel.ResultText = "Scissors beats paper, Computer wins!";
+            var move = GenerateMove(Weapon.paper);
+            var viewModel = _gameService.PlayGame(move);
 
-            return View("GameBoard", viewModel);
+            return GameBoardView(viewModel);
         }
 
         public ActionResult PlayScissors()
         {
-            //Some refinmen around rendering of draw required here....
+            var move = GenerateMove(Weapon.scissors);
+            var viewModel = _gameService.PlayGame(move);
 
-            var viewModel = new GameBoardViewModel();
-            viewModel.WinnerText = "Player 1";
-            viewModel.WinnerImage = "/Images/scissors.png";
-            viewModel.LoserText = "Computer";
-            viewModel.LoserImage = "/Images/scissors.png";
-            viewModel.ResultText = "Draw - what are the chances";
+            return GameBoardView(viewModel);
+        }
 
+        private ViewResult GameBoardView(GameBoardViewModel viewModel)
+        {
             return View("GameBoard", viewModel);
+        }
+
+        private Move GenerateMove(Weapon weaponType)
+        {
+            var move = new Move() { PlayerName = "Player1", WeaponType = weaponType};
+            return move;
         }
     }
 }
