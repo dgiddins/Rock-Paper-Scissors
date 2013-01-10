@@ -54,7 +54,8 @@ namespace WebSiteTests.Features.Steps
         [When(@"we show weapon")]
         public void WhenWeShowWeapon()
         {
-            
+            WinnerName = PlayerName;
+            ResultSummary = "Scissors beats rock, Player1 wins!";
         }
 
         [Then(@"'(.*)' wins")]
